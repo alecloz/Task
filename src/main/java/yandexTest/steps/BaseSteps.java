@@ -7,6 +7,7 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import yandexTest.core.DriverManager;
 import yandexTest.core.TestProperties;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class BaseSteps {
 
     private static Properties properties = TestProperties.getInstance().getProperties();
+    public static WebDriverWait webDriverWait;
 
     @Before
     public void startScenario() {
@@ -25,6 +27,7 @@ public class BaseSteps {
         driver.get(properties.getProperty("app.url"));
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        webDriverWait = new WebDriverWait(driver, 10, 1000);
     }
 
     @After

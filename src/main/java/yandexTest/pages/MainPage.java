@@ -2,10 +2,14 @@ package yandexTest.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import yandexTest.annotation.ElementTitle;
+import yandexTest.annotation.PageTitle;
 
 
-public class MainPage extends BasePageObject {
+@PageTitle("Яндекс")
+public class MainPage extends BasePage {
 
+    @ElementTitle("Маркет")
     @FindBy(xpath = "//a[contains(text(), 'Маркет')]")
     public WebElement categoryYandexMarket;
 

@@ -12,6 +12,7 @@ public class DriverManager {
     private static Properties properties = TestProperties.getInstance().getProperties();
     private static WebDriver driver = null;
 
+
     public static WebDriver getDriver() {
         if (driver == null) {
             driver = createDriver();
@@ -45,6 +46,7 @@ public class DriverManager {
         }
         return driver;
     }
+
 }
 
 
