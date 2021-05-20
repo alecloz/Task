@@ -10,7 +10,7 @@ import yandexTest.annotation.PageTitle;
 public class MainPage extends BasePage {
 
     @ElementTitle("Маркет")
-    @FindBy(xpath = "//a[contains(text(), 'Маркет')]")
+    @FindBy(xpath = "//div[contains(text(), 'Маркет')]")
     public WebElement categoryYandexMarket;
 
 

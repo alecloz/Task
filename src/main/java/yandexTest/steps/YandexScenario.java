@@ -12,8 +12,8 @@ import static yandexTest.core.PageManager.getCurrentPage;
 public class YandexScenario {
 
     private AllSteps steps;
-    private BasePage basePage = new BasePage();
-    private MarketPage marketPage = new MarketPage();
+    private final BasePage basePage = new BasePage();
+    private final MarketPage marketPage = new MarketPage();
 
     @When("Открыт сайт yandex.ru")
     public void start() {
@@ -21,11 +21,12 @@ public class YandexScenario {
         steps = new AllSteps();
     }
 
-    @When("На главной странице - \"(.+)\" выбран подраздел \"(.+)\"")
+    @When("На главной странице - \"(.+)\" выбрать подраздел \"(.+)\"")
     public void selectCategoryYandex(String page, String categoryName) {
         steps.openPage(page);
         basePage.assertCheckTitle(page);
         steps.click(categoryName);
+        basePage.refreshWindowHandle();
     }
 
     @When("Выполнить переход на страницу - \"(.+)\"")
@@ -37,6 +38,7 @@ public class YandexScenario {
     @When("Выбрать раздел \"(.+)\"")
     public void selectCategory(String categoryOfProduct) {
         steps.click(categoryOfProduct);
+        basePage.refreshWindowHandle();
         basePage.assertCheckTitle(categoryOfProduct);
     }
 
@@ -58,7 +60,7 @@ public class YandexScenario {
 
     @When("Выполнить \"(.+)\" результатов поиска")
     public void waitLoadElements(String load) {
-        steps.loadElements("Первый элемент списка");
+        steps.clickableElement(load);
     }
 
     @When("Установить \"(.+)\" - \"(.+)\"")
@@ -91,6 +93,4 @@ public class YandexScenario {
     public void checkResult(String firstElement) {
         steps.compareTwoElements(firstElement);
     }
-
-
 }

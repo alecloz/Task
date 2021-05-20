@@ -13,11 +13,11 @@ public class MarketPage extends BasePage {
     public static String savedValue;
 
     @ElementTitle("Компьютерная техника")
-    @FindBy(xpath = "//span[contains(text(), 'Компьютерная техника')]")
+    @FindBy(xpath = "//span[contains(text(), 'Компьютеры')]")
     public WebElement sectionPC;
 
     @ElementTitle("Ноутбуки")
-    @FindBy(xpath = "//a[contains(text(), 'Ноутбуки')]")
+    @FindBy(xpath = "//a[text() = 'Ноутбуки']")
     public WebElement typeLaptop;
 
     @ElementTitle("Цена от")
@@ -49,31 +49,31 @@ public class MarketPage extends BasePage {
     public WebElement clearSearchField;
 
     @ElementTitle("Приминение фильтра")
-    @FindBy(xpath = "//*[@class='i-bem n-pager-more n-pager-more_js_inited']")
+    @FindBy(xpath = "//script[@id='TELEPORT[store]']")
     public WebElement filteredProducts;
 
     @ElementTitle("Отображение элементов")
-    @FindBy(xpath = "//button[@role = 'listbox']")
+    @FindBy(xpath = "//span[contains(text(), 'Показывать по')]/../..")
     public WebElement countProductsOnPage;
 
     @ElementTitle("Показывать по 12")
-    @FindBy(xpath = "//span[contains(text(), 'Показывать по 12')]")
+    @FindBy(xpath = "//button[contains(text(), 'Показывать по 12')]")
     public WebElement showTwelveProductsOnPage;
 
     @ElementTitle("Ожидание обновления")
-    @FindBy(xpath = "//div[contains(@class,'i-bem metrika_js_inited')]")
+    @FindBy(xpath = "//a[@aria-label = 'Следующая страница']")
     public WebElement waitUpdateList;
 
     @ElementTitle("12")
-    @FindBy(xpath = "//div[contains(@data-bem, '\"products\":{\"count\":12}')]")
+    @FindBy(xpath = "//article[@data-zone-name='snippet-card'][1]")
     public WebElement checkTwelveProductsOnPage;
 
     @ElementTitle("Список продуктов")
-    @FindBy(xpath = "//div[contains(@data-bem, 'products')]/child::*")
+    @FindBy(xpath = "//article[@data-zone-name='snippet-card']")
     public List<WebElement> listOfProducts;
 
     @ElementTitle("Первый элемент списка")
-    @FindBy(xpath = "//div[contains(@data-bem, '\"products\":{\"count\"')]/div[1]//div[@class = 'n-snippet-card2__title']/a")
+    @FindBy(xpath = "//article[1]//h3[@data-zone-name='title']")
     public WebElement firstElementTitle;
 
     @ElementTitle("Поле поиска Маркета")
@@ -81,9 +81,8 @@ public class MarketPage extends BasePage {
     public WebElement marketSearchField;
 
     @ElementTitle("Найти")
-    @FindBy(xpath = "//span[@class='search2__button']/child::button")
+    @FindBy(xpath = "//span[contains(text(),'Найти')]")
     public WebElement marketSearchButton;
-
 
 }
 

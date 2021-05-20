@@ -2,6 +2,8 @@ package yandexTest.steps;
 
 import io.qameta.allure.Step;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import yandexTest.core.DriverManager;
 import yandexTest.pages.MarketPage;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import static yandexTest.core.PageManager.setupPage;
 
 class AllSteps {
 
-    private MarketPage marketPage = new MarketPage();
+    private final MarketPage marketPage = new MarketPage();
 
     @Step("Переходим на страницу - {0}")
     void openPage(String title) {
@@ -36,20 +38,29 @@ class AllSteps {
                     .getElementByTitle("Поле поиска").getAttribute("value"));
             //ждем пока в списке брендов останется только первый элемент
             getCurrentPage().waitForLoadProduct(marketPage.brandsCheckboxesLoad);
-            String beforeFilter = getCurrentPage().getElementByTitle("Приминение фильтра").getAttribute("data-bem");
             click("Первый элемент в списке производителей");
-            getCurrentPage().waitForLoadList(beforeFilter, "Приминение фильтра");
             click("Чистка поля поиска");
         }
     }
 
     @Step("Устанавливаем {0} - {1}")
     void displayElements(String view, String count) {
-        String beforeFilter = getCurrentPage().getElementByTitle("Ожидание обновления").getAttribute("data-bem");
+        int sizeOfList;
+        int timer = 100;
         scroll(view);
-        click(view);
+        while (timer != 0) {
+            try {
+                Thread.sleep(100);
+                timer -= 1;
+                click(view);
+                break;
+            } catch (Exception ignored) {
+            }
+        }
         click(count);
-        getCurrentPage().waitForLoadList(beforeFilter, "Ожидание обновления");
+        do {
+            sizeOfList = DriverManager.getDriver().findElements(By.xpath("//article[@data-zone-name='snippet-card']")).size();
+        } while (sizeOfList != 12);
     }
 
     @Step("Сохранение первого элемента в списке")
@@ -86,6 +97,11 @@ class AllSteps {
     @Step("Элемент {0} загружается")
     void loadElements(String load) {
         getCurrentPage().visible(getCurrentPage().getElementByTitle(load));
+    }
+
+    @Step("Элемент {0} становится кликабельным")
+    void clickableElement(String load) {
+        getCurrentPage().clickable(getCurrentPage().getElementByTitle(load));
     }
 
     @Step("Нажимаем на кнопку - {0}")
