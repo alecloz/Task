@@ -73,7 +73,7 @@ public class MarketPage extends BasePage {
     public List<WebElement> listOfProducts;
 
     @ElementTitle("Первый элемент списка")
-    @FindBy(xpath = "//article[1]//h3[@data-zone-name='title']")
+    @FindBy(xpath = "//article[1]//h3[@data-zone-name='title']/child::a")
     public WebElement firstElementTitle;
 
     @ElementTitle("Поле поиска Маркета")
